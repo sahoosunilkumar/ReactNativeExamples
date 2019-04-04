@@ -4,26 +4,6 @@ import { connect } from "react-redux";
 import { incrementBy, decrementBy } from "./redux/actions/counter";
 
 class App extends Component {
-  _increment = () => {
-    this.props.add(factor);
-  };
-
-  _decrement = () => {
-    this.props.remove(factor);
-  };
-
-  render() {
-    return (
-      <View style={styles.container}>
-        {this._renderBtn("-", this._decrement)}
-
-        <Text style={styles.counter}>{this.props.counter}</Text>
-
-        {this._renderBtn("+", this._increment)}
-      </View>
-    );
-  }
-
   _renderBtn = (title, operation) => {
     return (
       <TouchableOpacity style={styles.customBtnBG} onPress={operation}>
@@ -31,8 +11,25 @@ class App extends Component {
       </TouchableOpacity>
     );
   };
+
+  render() {
+    return (
+      <View style={styles.container}>
+        {this._renderBtn("-", this._decrement)}
+        <Text style={styles.counter}>{this.props.counter}</Text>
+        {this._renderBtn("+", this._increment)}
+      </View>
+    );
+  }
+
+  _increment = () => {
+    this.props.add(factor);
+  };
+
+  _decrement = () => {
+    this.props.remove(factor);
+  };
 }
-const factor = 1;
 
 const mapStateToProps = state => {
   return {
@@ -55,6 +52,8 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(App);
+
+const factor = 1;
 
 const styles = StyleSheet.create({
   container: {
